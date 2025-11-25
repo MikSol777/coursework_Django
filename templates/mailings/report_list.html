@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Отчеты{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Отчеты по рассылкам</h1>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Рассылка</th>
+            <th>Статус</th>
+            <th>Успешно</th>
+            <th>Не успешно</th>
+            <th>Всего попыток</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for mailing in mailings %}
+            <tr>
+                <td><a href="{% url 'mailings:mailing_detail' mailing.pk %}">#{{ mailing.pk }}</a></td>
+                <td>{{ mailing.status }}</td>
+                <td>{{ mailing.attempts_success }}</td>
+                <td>{{ mailing.attempts_fail }}</td>
+                <td>{{ mailing.attempts_total }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5">Данных пока нет.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+

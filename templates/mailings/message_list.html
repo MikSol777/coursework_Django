@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Сообщения{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Сообщения</h1>
+    <a class="btn btn-primary" href="{% url 'mailings:message_create' %}">Создать</a>
+</div>
+<div class="list-group">
+    {% for message in messages %}
+        <a class="list-group-item list-group-item-action" href="{% url 'mailings:message_detail' message.pk %}">
+            <div class="d-flex justify-content-between">
+                <h5 class="mb-1">{{ message.subject }}</h5>
+                <small class="text-muted">{{ message.created_at|date:"d.m.Y H:i" }}</small>
+            </div>
+            <p class="mb-1 text-truncate">{{ message.body }}</p>
+        </a>
+    {% empty %}
+        <p>Пока нет сообщений.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+
+

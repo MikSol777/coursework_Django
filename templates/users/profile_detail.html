@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        {% if user.avatar %}
+            <img class="img-fluid rounded mb-3" src="{{ user.avatar.url }}" alt="Аватар">
+        {% else %}
+            <div class="bg-light text-center py-5 rounded mb-3">Нет аватара</div>
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+        <h1>{{ user.get_full_name|default:user.email }}</h1>
+        <p>Email: {{ user.email }}</p>
+        <p>Телефон: {{ user.phone|default:"—" }}</p>
+        <p>Страна: {{ user.country|default:"—" }}</p>
+        <a class="btn btn-primary" href="{% url 'users:profile_edit' %}">Редактировать</a>
+    </div>
+</div>
+{% endblock %}
+
+

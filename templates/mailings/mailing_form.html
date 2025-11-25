@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Рассылка{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Рассылка</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Дата начала</label>
+            {{ form.start_at }}
+            {{ form.start_at.errors }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Дата окончания</label>
+            {{ form.finish_at }}
+            {{ form.finish_at.errors }}
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Статус</label>
+        {{ form.status }}
+        {{ form.status.errors }}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Сообщение</label>
+        {{ form.message }}
+        {{ form.message.errors }}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Получатели</label>
+        {{ form.clients }}
+        {{ form.clients.errors }}
+    </div>
+    <div class="form-check mb-3">
+        {{ form.is_active }}
+        <label class="form-check-label">Активная рассылка</label>
+        {{ form.is_active.errors }}
+    </div>
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+</form>
+{% endblock %}
+
+
